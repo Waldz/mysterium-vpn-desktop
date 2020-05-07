@@ -2,8 +2,8 @@ name: Release
 
 on:
   push:
-    # If the commit is tagged with a version (e.g. "v1.0.0") release the app after building
-    tags: ["v*"]
+    # If the commit is tagged with a version (e.g. "1.0.0") release the app after building
+    tags: ["*"]
 
 jobs:
   release:
@@ -23,8 +23,10 @@ jobs:
         with:
           node-version: 12
 
+      - id: get_version
+        uses: battila7/get-version-action@v1.2.1
       - name: Replace version
-        run: yarn version --new-version ${{ github.ref.replace('refs/tags/v', '') }}
+        run: yarn version --new-version ${{ steps.get_version.outputs.version }}
 
       - name: Release Electron app
         uses: samuelmeuli/action-electron-builder@v1
