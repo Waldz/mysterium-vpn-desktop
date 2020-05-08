@@ -86,7 +86,12 @@
   "build": {
     "appId": "network.mysterium.mysterium-vpn-desktop",
     "mac": {
+      "target": "dmg",
       "icon": "static/logo.icns"
+    },
+    "publish": {
+      "provider": "github",
+      "vPrefixedTagName": false
     }
   }
 }
